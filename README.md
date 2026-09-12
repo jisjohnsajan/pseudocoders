@@ -1,33 +1,88 @@
-# 🐭 Squeak & Seek 🐶
+# Ellie Killer 🎯 (Squeak & Seek)
 
-A gloriously useless **WebXR AR** game: a rat scurries around your real room, your dog companion tracks it, you corner the rat, catch it, and **YEET** it with ragdoll physics — complete with random meme sounds and fullscreen meme flashes on every throw.
+## Basic Details
+### Team Name: pseudocoders
 
-## Play
+### Team Members
+- Team Lead: Abhin Joe Saji - Vimal Jyothi Engineering College
+- Member 2: Jis John Sajan - Vimal Jyothi Engineering College
 
-- **AR (Android Chrome + ARCore):** https://jisjohnsajan.github.io/dog-game/
-- **Preview mode** (any desktop browser): works the full loop in a fake room — drag to look, tap the rat to catch, swipe up to yeet.
+## Project Description
+**Ellie Killer** is a gloriously useless WebXR augmented-reality game where a virtual rat scurries around your *actual* room, your floating AI dog companion barks to snitch on its hiding spot, and your only job is to corner the rat, catch it — and then **YEET it into the stratosphere** with full ragdoll physics, complete with random Malayalam meme sound effects and fullscreen meme flashes on impact. It's a complete cardio workout disguised as a game.
 
-## Gameplay
+### The Problem (that doesn't exist)
+Humanity has faced no greater crisis than this: a rat is *right there* in your living room (virtually), and you have no physically-accurate, smartphone-based, dog-assisted mechanism to chase it, catch it, and hurl it into the void while being rewarded with Basil Joseph laughing at your throwing technique. Peer-reviewed studies (by us, in our imagination) confirm that 0% of AR apps on the market let you yeet a rat. This is the market failure of our generation.
 
-1. 🐭 A rat spawns on your floor and scurries around your real room.
-2. 🐕 Your pet companion is anchored to the camera and constantly looks at the rat — barking (RUFF!) when it hides.
-3. 🙈 The rat's AI bolts for hiding spots learned from your furniture (tables, pillars, walls) via the XR hit-test.
-4. 👆 Corner it and **TAP** to catch it (boing!).
-5. 🚀 **SWIPE UP** to yeet it — cannon-es ragdoll flight, random meme sound, random fullscreen meme flash, splat + ta-da fanfare.
+### The Solution (that nobody asked for)
+A full WebXR pipeline that: detects your real-world floor with plane detection, spawns a rat with hiding AI that uses XR hit-testing to bolt behind your actual furniture, a low-poly dog companion camera-anchored to your phone that tracks the rat with look-at rotation and barks (RUFF!) when it's hidden, a raycast tap-to-catch system, and a swipe-to-yeet cannon-es ragdoll launch where the rat screams across your room in a physics-accurate arc — landing with a splat, a ta-da fanfare, a random meme sound, and a fullscreen meme image. The loop then repeats with a fresh rat, because the rat supply, like our genius, is infinite.
 
-## Tech
+## Technical Details
+### Technologies/Components Used
+For Software:
+- Languages: JavaScript (ES Modules), HTML5, CSS3
+- Frameworks: Three.js (WebGL/WebXR rendering)
+- Libraries: cannon-es (physics/ragdoll), Web Audio API (synthesized SFX), WebXR Device API (hit-test, plane detection, local-floor, dom-overlay)
+- Tools: VS Code, Git/GitHub, GitHub Pages, http-server
 
-- **Three.js** — rendering, primitives-based models (swap in your own GLTF — see notes at the bottom of `game.js`)
-- **cannon-es** — physics for the yeet ragdoll
-- **WebXR** (`immersive-ar` + `hit-test` + `local-floor` + `dom-overlay`) — plane/floor detection, reticle spawning
-- **Web Audio API** — 100% synthesized squeaks, barks, boings, splats, and fanfares (`sfx.js`) — zero audio assets for the core effects
-- Your own meme mp3s + images as random throw surprises
+For Hardware:
+- Any WebXR-capable Android phone (ARCore-supported) with a camera
+- Specs: Chrome browser, HTTPS connection, gyroscope + accelerometer (standard smartphone sensors)
+- No extra tools required — it runs entirely in the mobile browser
 
-## Files
+### Implementation
+For Software:
+#### Installation
+```bash
+git clone https://github.com/jisjohnsajan/pseudocoders.git
+cd pseudocoders
+```
+(No build step — pure static site. If you want a local server:)
+```bash
+npx http-server -p 8080
+```
 
-| File | Purpose |
-|---|---|
-| `index.html` | HUD, start overlay, meme flash layer, import map |
-| `game.js` | Full game loop, rat/pet AI, WebXR session, catch/yeet |
-| `sfx.js` | Synthesized SFX + random meme throw sounds (`THROWS` array) |
-| `*.mp3` / `*.webp` / `*.jpg` | Meme assets (randomly picked per yeet; `MEME_IMAGES` in `game.js`) |
+#### Run
+- **Instant play:** open https://jisjohnsajan.github.io/dog-game/ (or serve locally and open `index.html`)
+- On an ARCore Android phone with Chrome → tap **ENTER AR** → scan your floor → tap the green ring to spawn the rat
+- No WebXR device? Tap **Preview in this browser** — full gameplay loop in a simulated room
+
+### Project Documentation
+For Software:
+# Screenshots
+![Screenshot1](Screenshot%202026-09-12%20145213.png.jpg)
+*Start screen + preview mode: the rat scurries on the floor, the dog companion (bottom-right) tracks it, HUD shows the yeet counter — while the user chases the rat around the simulated room in the desktop Preview mode*
+
+# Diagrams
+```
+[Camera/Phone] → WebXR hit-test + plane detection
+       ↓
+[Rat AI] ← hiding spots (tables/pillars from real-world scan)
+       ↓ (rat hides)
+[Pet AI] → look-at controller → barks toward hidden rat
+       ↓ (user physically moves + corners rat)
+[Tap raycast] → CATCH (boing) → rat attached to camera
+       ↓ (swipe up)
+[cannon-es ragdoll] → YEET → random meme sound + fullscreen meme flash on impact
+       ↓ (rat settles)
+[Splat + fanfare + score] → respawn → repeat forever
+```
+*Game loop: each yeet scores +1 and respawns a fresh rat; meme sounds and images are drawn from shuffle-bags so every throw is a surprise*
+
+### Project Demo
+# Video
+[https://drive.google.com/file/d/1u08qsbDUyhbZ0bCGgPlLMQ0100EzKM2w/view?usp=drivesdk](https://drive.google.com/file/d/1u08qsbDUyhbZ0bCGgPlLMQ0100EzKM2w/view?usp=drivesdk)
+*The video demonstrates the full gameplay loop: spawning the rat in AR, the dog companion tracking and barking, chasing the rat as it hides behind real furniture, tap-to-catch, and the swipe-to-yeet ragdoll launch with meme sound and image reactions*
+
+# Additional Demos
+- Live deployment (GitHub Pages, HTTPS for WebXR): https://jisjohnsajan.github.io/dog-game/
+- All synthesized sound effects (squeaks, barks, boings, splats, fanfares) are generated at runtime in `sfx.js` — zero audio assets for core SFX
+
+## Team Contributions
+- Abhin Joe Saji: Game design & mechanics, rat AI/hiding logic, gameplay testing, presentation & demo video
+- Jis John Sajan: WebXR/AR pipeline, Three.js scene & rendering, physics integration, sound engine & meme system, deployment
+
+---
+Made with ❤️ at TinkerHub Useless Projects
+
+![Static Badge](https://img.shields.io/badge/TinkerHub-24?color=%23000000&link=https%3A%2F%2Fwww.tinkerhub.org%2F)
+![Static Badge](https://img.shields.io/badge/UselessProjects--26-26?link=https%3A%2F%2Ftinkerhub.org%2Fevents%2F1M8ORET9A1%2Fuseless-projects-3.0)
